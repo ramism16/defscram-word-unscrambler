@@ -21,25 +21,25 @@ def import_list():
 
 def unscramble_word(scrambledWord, wordList):
     countToMatch = len(scrambledWord)   #letter count of the search word
-    matchedWords = []
+    unscrambled = ""
     flag = 0                            #flag to indicate found word           
 
     for word in wordList:
-        count = 0                       #count of search word's letter in dictionary word's letter
-        for x in scrambledWord.lower(): #lowercase comparison of words
-            if x in word.lower():
-                count += 1
-            if count == countToMatch:
-                flag = 1
-                matchedWords.append(word)
-                break
+        if len(word) == countToMatch:
+            count = 0                       #count of search word's letter in dictionary word's letter
+            for x in scrambledWord.lower(): #lowercase comparison of words
+                if x in word.lower():
+                    count += 1
+                if count == countToMatch:
+                    flag = 1
+                    unscrambled = word
+                    break
     DSA.end()
     if flag == 0:
         print("Word not found")
     else:
-        for matchedWord in matchedWords:
-            if len(matchedWord) == len(scrambledWord): #Final Length check in the matched words array to separate answers
-                print(matchedWord)
+        if len(unscrambled) == countToMatch:
+            print("Matched word found: " + unscrambled)
 
 def permutation(scrambled):
     if scrambled == "":         #base case
